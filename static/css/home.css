@@ -65,12 +65,7 @@ h1 {
     font-size: 0.95rem;
 }
 
-.calculator-card .features li:before {
-    content: "✓ ";
-    color: #2563eb;
-    font-weight: bold;
-    margin-right: 8px;
-}
+
 
 .calculator-card .cta {
     background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);

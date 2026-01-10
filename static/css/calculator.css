@@ -83,6 +83,33 @@ input[type="range"]::-moz-range-thumb:hover {
     box-shadow: 0 0 0 8px rgba(37, 99, 235, 0.1);
 }
 
+/* Range label improvements: keep labels compact and avoid wrapping */
+.range-labels {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: #94a3b8;
+    margin-top: 0.25rem;
+}
+.range-labels span {
+    max-width: 48%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+}
+
+@media (max-width: 420px) {
+    .range-labels {
+        gap: 6px;
+    }
+    .range-labels span {
+        max-width: 46%;
+        font-size: 0.8rem;
+    }
+}
+
 /* Buttons */
 .btn {
     background: #1a73e8;

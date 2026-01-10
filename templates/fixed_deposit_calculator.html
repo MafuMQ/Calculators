@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+
+{% block title %}Fixed Deposit Calculator{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/calculator.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/fixed_deposit.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="calculator-container">
+    <div class="calculator">
+        <h2>Fixed Deposit Calculator</h2>
+        <p class="description">Calculate returns on your fixed deposit investment with compound interest</p>
+
+        <div class="input-group">
+            <label>
+                <span>Currency</span>
+                <select id="currency" class="currency-select">
+                    <option value="ZAR" selected>R (ZAR)</option>
+                    <option value="USD">$ (USD)</option>
+                    <option value="EUR">€ (EUR)</option>
+                    <option value="GBP">£ (GBP)</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="input-group">
+            <label>
+                <span>Principal Amount</span>
+                <span class="value-display" id="principalDisplay">R100,000</span>
+            </label>
+            <input type="range" id="principal" min="1000" max="10000000" step="1000" value="100000">
+            <div class="range-labels">
+                <span id="minPrincipalLabel">R1,000</span>
+                <span id="maxPrincipalLabel">R10M</span>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label>
+                <span>Interest Rate (% per annum)</span>
+                <span class="value-display" id="rateDisplay">7.5%</span>
+            </label>
+            <input type="range" id="rate" min="0.1" max="20" step="0.1" value="7.5">
+            <div class="range-labels">
+                <span>0.1%</span>
+                <span>20%</span>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label>
+                <span>Tenure</span>
+                <span class="value-display" id="tenureDisplay">5 Years</span>
+            </label>
+            <input type="range" id="tenure" min="1" max="30" step="1" value="5">
+            <div class="range-labels">
+                <span>1 Year</span>
+                <span>30 Years</span>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label>
+                <span>Compounding Frequency</span>
+                <select id="frequency" class="frequency-select">
+                    <option value="1">Annually</option>
+                    <option value="2">Semi-Annually</option>
+                    <option value="4" selected>Quarterly</option>
+                    <option value="12">Monthly</option>
+                    <option value="365">Daily</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="input-group">
+            <label>
+                <span>Payout Mode</span>
+                <select id="payoutMode" class="frequency-select">
+                    <option value="reinvest" selected>Reinvest (Maturity)</option>
+                    <option value="monthly">Payout Monthly</option>
+                    <option value="quarterly">Payout Quarterly</option>
+                    <option value="annually">Payout Annually</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="result-box">
+            <div class="result-label">Maturity Amount</div>
+            <div class="result-value" id="maturityAmount">R141,060</div>
+            
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">Total Interest Earned</div>
+                    <div class="info-value" id="interestEarned">R41,060</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Effective Annual Rate</div>
+                    <div class="info-value" id="effectiveRate">7.71%</div>
+                </div>
+            </div>
+            
+            <div class="breakdown">
+                <h3>Investment Breakdown</h3>
+                <div class="breakdown-bar">
+                    <div class="breakdown-principal" id="breakdownPrincipal" style="width: 70.9%">
+                        <span>Principal</span>
+                    </div>
+                    <div class="breakdown-interest" id="breakdownInterest" style="width: 29.1%">
+                        <span>Interest</span>
+                    </div>
+                </div>
+                <div class="breakdown-labels">
+                    <div class="breakdown-label">
+                        <span class="color-box principal-color"></span>
+                        <span>Principal: <strong id="breakdownPrincipalAmount">R100,000</strong></span>
+                    </div>
+                    <div class="breakdown-label">
+                        <span class="color-box interest-color"></span>
+                        <span>Interest: <strong id="breakdownInterestAmount">R41,060</strong></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/fixed_deposit.js') }}"></script>
+{% endblock %}

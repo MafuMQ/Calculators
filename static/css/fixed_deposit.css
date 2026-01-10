@@ -1,0 +1,199 @@
+/* Fixed Deposit Calculator Specific Styles */
+
+.calculator-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+.calculator {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+}
+
+.input-group label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+
+.value-display {
+    color: #2563eb;
+    font-size: 1.1rem;
+}
+
+/* Heading, description and result box to match Building calculator */
+.calculator h2 {
+    margin-top: 0;
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.description {
+    text-align: center;
+    color: #64748b;
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+}
+
+.result-box {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border: 2px solid #bfdbfe;
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    margin-top: 2.5rem;
+}
+
+.result-box .result-label {
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #64748b;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+}
+
+.result-box .result-value {
+    font-size: 3rem;
+    font-weight: 800;
+    color: #2563eb;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+}
+
+.sub-text {
+    font-size: 0.9rem;
+    color: #64748b;
+    margin-top: 12px;
+    line-height: 1.4;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e2e8f0;
+}
+
+.info-item {
+    text-align: center;
+}
+
+.info-label {
+    font-size: 0.8rem;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.25rem;
+}
+
+.info-value {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #475569;
+}
+
+.breakdown {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #e5e7eb;
+}
+
+.breakdown h3 {
+    font-size: 1.1rem;
+    color: #0d4a6b;
+    margin-bottom: 15px;
+}
+
+.breakdown-bar {
+    display: flex;
+    height: 50px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.breakdown-principal,
+.breakdown-interest {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    transition: width 0.3s ease;
+}
+
+.breakdown-principal {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+}
+
+.breakdown-interest {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+}
+
+.breakdown-labels {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+}
+
+.breakdown-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.95rem;
+    color: #555;
+}
+
+.color-box {
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+}
+
+.principal-color {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+}
+
+.interest-color {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+}
+
+.frequency-select {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 1rem;
+    background: white;
+    cursor: pointer;
+    transition: border-color 0.3s;
+}
+
+.frequency-select:hover,
+.frequency-select:focus {
+    border-color: #2563eb;
+    outline: none;
+}
+
+@media (max-width: 768px) {
+    .breakdown-labels {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .breakdown-bar span {
+        font-size: 0.8rem;
+    }
+}

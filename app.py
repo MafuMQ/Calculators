@@ -21,6 +21,11 @@ def building_calculator():
     """Building cost recovery calculator"""
     return render_template('building_calculator.html')
 
+@app.route('/fixed-deposit')
+def fixed_deposit_calculator():
+    """Fixed deposit calculator"""
+    return render_template('fixed_deposit_calculator.html')
+
 @app.route('/calculate', methods=['POST'])
 def calculate():
     try:
