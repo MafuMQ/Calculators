@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %}Building Cost Recovery Calculator{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/calculator.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/building.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="calculator-container">
+    <div class="calculator">
+        <h2>Building Cost Recovery</h2>
+        <p class="description">Calculate the monthly rent per unit needed to recover construction costs</p>
+
+        <div class="input-group">
+            <label>
+                <span>Building Cost</span>
+                <span class="value-display" id="costDisplay">$65,000,000</span>
+            </label>
+            <input type="range" id="cost" min="1000000" max="200000000" step="100000" value="65000000">
+            <div class="range-labels">
+                <span>$1M</span>
+                <span>$200M</span>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label>
+                <span>Total Units</span>
+                <span class="value-display" id="unitsDisplay">235</span>
+            </label>
+            <input type="range" id="units" min="1" max="1000" step="1" value="235">
+            <div class="range-labels">
+                <span>1</span>
+                <span>1,000</span>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label>
+                <span>Recovery Period</span>
+                <span class="value-display" id="yearsDisplay">20 Years</span>
+            </label>
+            <input type="range" id="years" min="1" max="50" step="1" value="20">
+            <div class="range-labels">
+                <span>1 Year</span>
+                <span>50 Years</span>
+            </div>
+        </div>
+
+        <div class="result-box">
+            <div class="result-label">Required Monthly Rent Per Unit</div>
+            <div class="result-value" id="result">$1,152</div>
+            <div class="sub-text">
+                *Basic recovery calculation excluding interest, taxes, maintenance, 
+                insurance, and other operating costs
+            </div>
+            
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label">Annual per Unit</div>
+                    <div class="info-value" id="annualPerUnit">$13,824</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label">Total Monthly</div>
+                    <div class="info-value" id="totalMonthly">$270,680</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/building.js') }}"></script>
+{% endblock %}

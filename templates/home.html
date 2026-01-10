@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}Cost Recovery Calculators - Home{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <header>
+        <h1>Cost Recovery Calculators</h1>
+        <p class="subtitle">
+            Professional tools to help you calculate break-even periods, payback timelines, 
+            and recovery costs for your investments and projects.
+        </p>
+    </header>
+
+    <div class="calculators-grid">
+        <a href="/solar" class="calculator-card">
+            <div class="calculator-icon">☀️</div>
+            <h2>Solar Break-Even Calculator</h2>
+            <p>Calculate the payback period for solar panel installations based on your energy consumption, peak power requirements, and electricity costs.</p>
+            <ul class="features">
+                <li>Peak power capacity planning</li>
+                <li>Annual vs Monthly analysis</li>
+                <li>Interactive cost comparison graphs</li>
+                <li>Real-time break-even visualization</li>
+            </ul>
+            <div class="cta">Launch Calculator →</div>
+        </a>
+
+        <a href="/building" class="calculator-card">
+            <div class="calculator-icon">🏢</div>
+            <h2>Building Cost Recovery</h2>
+            <p>Determine the monthly rent per unit needed to recover your building construction costs over a specified time period.</p>
+            <ul class="features">
+                <li>Multi-unit rental calculations</li>
+                <li>Flexible recovery periods</li>
+                <li>Interactive sliders</li>
+                <li>Instant rent calculations</li>
+            </ul>
+            <div class="cta">Launch Calculator →</div>
+        </a>
+
+        <!-- Placeholder for future calculator -->
+        <div class="calculator-card coming-soon">
+            <div class="calculator-icon">📊</div>
+            <h2>ROI Calculator</h2>
+            <p>Coming soon! Calculate return on investment for various business and personal projects.</p>
+            <ul class="features">
+                <li>Multiple investment types</li>
+                <li>Compound interest modeling</li>
+                <li>Risk assessment</li>
+                <li>Scenario comparison</li>
+            </ul>
+            <div class="cta">Coming Soon</div>
+        </div>
+    </div>
+</div>
+{% endblock %}

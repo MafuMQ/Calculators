@@ -1,0 +1,129 @@
+/* Base Styles - Applied to all pages */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #f0f9ff 0%, #e6f7ff 100%);
+    color: #2c3e50;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Navigation */
+nav {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+nav .nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #0d4a6b;
+    text-decoration: none;
+}
+
+nav .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+}
+
+nav .nav-links a {
+    color: #0d4a6b;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+nav .nav-links a:hover {
+    color: #2563eb;
+}
+
+nav .nav-links a.active {
+    color: #2563eb;
+    border-bottom: 2px solid #2563eb;
+    padding-bottom: 2px;
+}
+
+/* Main Content */
+main {
+    flex: 1;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Footer */
+footer {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 1.5rem 2rem;
+    text-align: center;
+    color: #666;
+    margin-top: 2rem;
+}
+
+/* Common Headers */
+header {
+    text-align: center;
+    padding: 30px 20px;
+    margin-bottom: 25px;
+}
+
+h1 {
+    font-size: 2.6rem;
+    color: #0d4a6b;
+    margin-bottom: 12px;
+}
+
+h2 {
+    font-size: 2rem;
+    color: #0d4a6b;
+    margin-bottom: 15px;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    color: #555;
+    max-width: 750px;
+    margin: 0 auto;
+    line-height: 1.5;
+}
+
+/* Responsive Navigation */
+@media (max-width: 768px) {
+    nav .nav-container {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    nav .nav-links {
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 2.2rem;
+    }
+}

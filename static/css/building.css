@@ -1,0 +1,128 @@
+/* Building Calculator Specific Styles */
+.calculator-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+.calculator {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+}
+
+.calculator h2 {
+    margin-top: 0;
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.description {
+    text-align: center;
+    color: #64748b;
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+}
+
+.input-group {
+    margin-bottom: 2rem;
+}
+
+.input-group label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+
+.value-display {
+    color: #2563eb;
+    font-size: 1.1rem;
+}
+
+.range-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: #94a3b8;
+    margin-top: 0.25rem;
+}
+
+.result-box {
+    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    border: 2px solid #bfdbfe;
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    margin-top: 2.5rem;
+}
+
+.result-box .result-label {
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #64748b;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+}
+
+.result-box .result-value {
+    font-size: 3rem;
+    font-weight: 800;
+    color: #2563eb;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+}
+
+.sub-text {
+    font-size: 0.9rem;
+    color: #64748b;
+    margin-top: 12px;
+    line-height: 1.4;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e2e8f0;
+}
+
+.info-item {
+    text-align: center;
+}
+
+.info-label {
+    font-size: 0.8rem;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.25rem;
+}
+
+.info-value {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #475569;
+}
+
+@media (max-width: 640px) {
+    .calculator {
+        padding: 1.5rem;
+    }
+
+    .result-box .result-value {
+        font-size: 2.5rem;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+}

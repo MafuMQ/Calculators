@@ -1,0 +1,73 @@
+/* Solar Calculator Specific Styles */
+.graph-row {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    margin-top: 18px;
+}
+
+.graph-card {
+    flex: 1;
+    min-width: 350px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+    padding: 15px;
+    margin-bottom: 18px;
+}
+
+.graph-container {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    margin-top: 30px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+#graph-cumulative-container,
+#graph-cost-container {
+    width: 100%;
+    height: 500px;
+    margin-top: 10px;
+}
+
+.assumptions {
+    background: #e8f5e9;
+    border-radius: 12px;
+    padding: 22px;
+    margin-top: 25px;
+    font-size: 0.95rem;
+    border-left: 4px solid #4caf50;
+}
+
+.assumptions h3 {
+    margin-bottom: 12px;
+    color: #2e7d32;
+    font-size: 1.25rem;
+}
+
+.assumptions ul {
+    padding-left: 22px;
+}
+
+.assumptions li {
+    margin-bottom: 9px;
+    line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+    .graph-row {
+        flex-direction: column;
+    }
+
+    .graph-card {
+        min-width: 100%;
+    }
+
+    #graph-cumulative-container,
+    #graph-cost-container {
+        height: 400px;
+    }
+}
+

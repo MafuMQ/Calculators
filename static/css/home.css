@@ -1,0 +1,111 @@
+/* Home Page Styles */
+header {
+    padding: 50px 20px;
+    margin-bottom: 40px;
+}
+
+h1 {
+    font-size: 3rem;
+}
+
+.subtitle {
+    font-size: 1.3rem;
+}
+
+.calculators-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.calculator-card {
+    background: white;
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+}
+
+.calculator-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.calculator-icon {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+}
+
+.calculator-card h2 {
+    font-size: 1.8rem;
+    color: #0d4a6b;
+    margin-bottom: 15px;
+}
+
+.calculator-card p {
+    color: #666;
+    line-height: 1.7;
+    flex-grow: 1;
+    margin-bottom: 20px;
+}
+
+.calculator-card .features {
+    list-style: none;
+    margin-bottom: 20px;
+}
+
+.calculator-card .features li {
+    padding: 5px 0;
+    color: #555;
+    font-size: 0.95rem;
+}
+
+.calculator-card .features li:before {
+    content: "✓ ";
+    color: #2563eb;
+    font-weight: bold;
+    margin-right: 8px;
+}
+
+.calculator-card .cta {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 600;
+    transition: background 0.3s;
+}
+
+.calculator-card:hover .cta {
+    background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+}
+
+.coming-soon {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.coming-soon .cta {
+    background: #94a3b8;
+}
+
+.coming-soon:hover {
+    transform: none;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2.2rem;
+    }
+
+    .calculators-grid {
+        grid-template-columns: 1fr;
+    }
+}
