@@ -1,5 +1,4 @@
 /* Fixed Deposit Calculator Specific Styles */
-
 .calculator-container {
     display: flex;
     justify-content: center;
@@ -16,19 +15,6 @@
     max-width: 600px;
 }
 
-.input-group label {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 0.75rem;
-}
-
-.value-display {
-    color: #2563eb;
-    font-size: 1.1rem;
-}
-
-/* Heading, description and result box to match Building calculator */
 .calculator h2 {
     margin-top: 0;
     text-align: center;
@@ -41,6 +27,30 @@
     color: #64748b;
     margin-bottom: 2rem;
     font-size: 0.95rem;
+}
+
+.input-group {
+    margin-bottom: 2rem;
+}
+
+.input-group label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+
+.value-display {
+    color: #2563eb;
+    font-size: 1.1rem;
+}
+
+.range-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: #94a3b8;
+    margin-top: 0.25rem;
 }
 
 .result-box {
@@ -103,6 +113,7 @@
     color: #475569;
 }
 
+/* Breakdown section specific to FD calculator */
 .breakdown {
     margin-top: 30px;
     padding-top: 20px;
@@ -170,7 +181,8 @@
     background: linear-gradient(135deg, #10b981 0%, #059669 100%);
 }
 
-.frequency-select {
+.frequency-select,
+.currency-select {
     width: 100%;
     padding: 10px;
     border: 2px solid #e5e7eb;
@@ -182,12 +194,26 @@
 }
 
 .frequency-select:hover,
-.frequency-select:focus {
+.frequency-select:focus,
+.currency-select:hover,
+.currency-select:focus {
     border-color: #2563eb;
     outline: none;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 640px) {
+    .calculator {
+        padding: 1.5rem;
+    }
+
+    .result-box .result-value {
+        font-size: 2.5rem;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+    
     .breakdown-labels {
         flex-direction: column;
         gap: 10px;
