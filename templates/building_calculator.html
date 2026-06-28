@@ -9,11 +9,15 @@
 
 {% block content %}
 <div class="calculator-container">
-    <div class="calculator">
-        <h2>Building Cost Recovery</h2>
-        <p class="description">Calculate the monthly rent per unit needed to recover construction costs</p>
+    <div class="calculator" style="max-width: 1000px;">
+        <header>
+            <h2>Building Cost Recovery</h2>
+            <p class="description" style="margin-bottom: 0;">Calculate the monthly rent per unit needed to recover construction costs</p>
+        </header>
 
-        <div class="input-group">
+        <div class="split-layout">
+            <div class="inputs-section">
+                <div class="input-group">
             <label>
                 <span>Currency</span>
                 <select id="currency" class="currency-select">
@@ -61,7 +65,10 @@
             </div>
         </div>
 
-        <div class="result-box">
+            </div>
+            
+            <div class="outputs-section">
+                <div class="result-box">
             <div class="result-label">Required Monthly Rent Per Unit</div>
             <div class="result-value" id="result">R1,152</div>
             <div class="sub-text">
@@ -77,6 +84,9 @@
                 <div class="info-item">
                     <div class="info-label">Total Monthly</div>
                     <div class="info-value" id="totalMonthly">R270,680</div>
+                </div>
+            </div>
+        </div>
                 </div>
             </div>
         </div>

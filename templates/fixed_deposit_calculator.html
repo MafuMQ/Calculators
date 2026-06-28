@@ -9,11 +9,15 @@
 
 {% block content %}
 <div class="calculator-container">
-    <div class="calculator">
-        <h2>Fixed Deposit Calculator</h2>
-        <p class="description">Calculate returns on your fixed deposit investment with compound interest</p>
+    <div class="calculator" style="max-width: 1000px;">
+        <header>
+            <h2>Fixed Deposit Calculator</h2>
+            <p class="description" style="margin-bottom: 0;">Calculate returns on your fixed deposit investment with compound interest</p>
+        </header>
 
-        <div class="input-group">
+        <div class="split-layout">
+            <div class="inputs-section">
+                <div class="input-group">
             <label>
                 <span>Currency</span>
                 <select id="currency" class="currency-select">
@@ -86,7 +90,10 @@
             </label>
         </div>
 
-        <div class="result-box">
+            </div>
+            
+            <div class="outputs-section">
+                <div class="result-box">
             <div class="result-label">Maturity Amount</div>
             <div class="result-value" id="maturityAmount">R141,060</div>
             
@@ -120,6 +127,9 @@
                         <span class="color-box interest-color"></span>
                         <span>Interest: <strong id="breakdownInterestAmount">R41,060</strong></span>
                     </div>
+                </div>
+            </div>
+        </div>
                 </div>
             </div>
         </div>

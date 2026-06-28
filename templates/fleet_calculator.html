@@ -5,51 +5,6 @@
 {% block extra_head %}
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/calculator.css') }}">
-<style>
-    .fleet-layout {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        gap: 30px;
-    }
-    .fleet-inputs {
-        width: 35%;
-        background-color: #f8fafc;
-        padding: 20px;
-        border-radius: 12px;
-        border: 2px solid #e2e8f0;
-    }
-    .fleet-outputs {
-        width: 60%;
-    }
-    .section-title {
-        margin-top: 0;
-        margin-bottom: 15px;
-        font-size: 1.1rem;
-        color: #0f172a;
-        border-bottom: 2px solid #e2e8f0;
-        padding-bottom: 5px;
-    }
-    .fleet-inputs .form-group {
-        margin-bottom: 12px;
-    }
-    .fleet-inputs label {
-        font-size: 0.9rem;
-        margin-bottom: 4px;
-    }
-    .fleet-inputs input {
-        padding: 8px 10px;
-        font-size: 0.95rem;
-    }
-    @media (max-width: 768px) {
-        .fleet-layout {
-            flex-direction: column;
-        }
-        .fleet-inputs, .fleet-outputs {
-            width: 100%;
-        }
-    }
-</style>
 {% endblock %}
 
 {% block content %}
@@ -59,8 +14,8 @@
         <p class="subtitle">Calculate trip costs based on fuel, driver pay, and vehicle financing.</p>
     </header>
     
-    <div class="card fleet-layout">
-        <div class="fleet-inputs">
+    <div class="card split-layout">
+        <div class="inputs-section fleet-inputs">
             <h3 class="section-title">Trip Variables</h3>
             <div class="form-group">
                 <label for="distance">Distance (km)</label>
@@ -110,7 +65,7 @@
             </div>
         </div>
         
-        <div class="fleet-outputs">
+        <div class="outputs-section">
             <div id="error-message" class="error"></div>
             
             <div id="results" class="results" style="display: block; margin-top: 0;">
