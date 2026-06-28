@@ -3,15 +3,17 @@
 ## Project Overview
 A comprehensive web application featuring multiple financial calculators to help users make informed decisions about investments and cost recovery. The platform currently includes:
 
-1. **Solar Break-Even Calculator** - Determines the financial feasibility and payback period for solar panel installations
-2. **Building Cost Recovery Calculator** - Calculates monthly rent per unit needed to recover construction costs
+1. **Solar Break-Even Calculator** - Determines the financial feasibility and payback period for solar panel installations.
+2. **Building Cost Recovery Calculator** - Calculates monthly rent per unit needed to recover construction costs.
+3. **Fixed Deposit Calculator** - Computes maturity amounts and interest earned on fixed deposit investments.
+4. **Fleet & Trip Cost Calculator** - Calculates trip costs based on fuel efficiency, driver pay, and vehicle financing.
 
 ## Features
 - **Modern, Responsive UI** - Works seamlessly on desktop and mobile devices
 - **Multiple Calculators** - Unified platform with navigation between different tools
-- **Interactive Visualizations** - Real-time graphs and charts (Solar Calculator)
-- **Instant Calculations** - Dynamic sliders with immediate results
-- **Professional Navigation** - Easy access to all calculators from a central hub
+- **Interactive Visualizations** - Real-time graphs and charts using Plotly.js
+- **Instant Calculations** - Dynamic inputs with immediate real-time results
+- **Professional Navigation** - Easy access to all calculators from a central home hub
 
 ## Usage Instructions
 To run the application, follow these steps:
@@ -45,33 +47,22 @@ Analyzes the financial viability of solar panel installations by calculating:
 - Cumulative cost comparisons (grid vs. solar)
 - Monthly or annual cost analysis modes
 
-**Key Inputs:**
-- Panel cost and wattage
-- Current electricity cost per kWh
-- Daily energy consumption
-- Peak power requirements
-
 ### Building Cost Recovery Calculator (`/building`)
 Determines the monthly rental income needed per unit to recover building construction costs over time.
 
-**Key Inputs:**
-- Total building cost ($1M - $200M)
-- Number of units (1 - 1,000)
-- Recovery period (1 - 50 years)
+### Fixed Deposit Calculator (`/fixed-deposit`)
+Calculate maturity amount and interest earned on your fixed deposit investments with compound interest calculations.
 
-**Outputs:**
-- Monthly rent per unit
-- Annual rent per unit
-- Total monthly revenue
-
-*Note: Calculations exclude interest, taxes, maintenance, and operating costs*
+### Fleet & Trip Cost Calculator (`/fleet`)
+Calculates trip costs based on fuel efficiency, driver pay, and vehicle financing to better manage your fleet expenses.
+- Real-time updates without needing to click calculate
+- Interactive Cost Breakdown Pie Chart
+- Dynamic driver pay rate calculation (Per Hour / Per Day / Per Month)
 
 ## Dependencies
 - Flask - Web framework
-- Plotly - Interactive visualizations (Solar Calculator)
+- Plotly.js - Interactive visualizations
 - Python 3.6+
-
-Ensure you have these libraries installed by following the **Install Dependencies** section above.
 
 ## Project Structure
 ```
@@ -85,13 +76,16 @@ solar-break-even/
 │   │   ├── solar.css              # Solar calculator specific styles
 │   │   └── building.css           # Building calculator specific styles
 │   └── js/
+│       ├── fleet.js               # Fleet & Trip calculator functionality
 │       ├── solar.js               # Solar calculator functionality
 │       └── building.js            # Building calculator functionality
 ├── templates/
 │   ├── base.html                  # Base template with navigation
 │   ├── home.html                  # Landing page with calculator cards
 │   ├── solar_calculator.html      # Solar break-even calculator
-│   └── building_calculator.html   # Building cost recovery calculator
+│   ├── building_calculator.html   # Building cost recovery calculator
+│   ├── fleet_calculator.html      # Fleet & Trip cost calculator
+│   └── fixed_deposit_calculator.html # Fixed deposit calculator
 ├── requirements.txt               # Python dependencies
 ├── vercel.json                    # Deployment configuration
 └── README.md                      # This file
@@ -108,32 +102,6 @@ To add a new calculator to the platform:
        return render_template('your_calculator.html')
    ```
 3. Add a card for your calculator in `templates/home.html`
-4. Update the navigation in `templates/base.html` if needed
-
-## Example Scenario - Solar Calculator
-Let's consider a scenario:
-- **Panel Cost**: R1,500 per panel
-- **Panel Wattage**: 400W
-- **Daily Energy Consumption**: 30 kWh
-- **Peak Power Requirement**: 5,000W
-- **Current Electricity Cost**: R2.50/kWh
-
-**Results:**
-- Required Capacity: 5,000W (12.5 panels)
-- Total Solar Cost: R18,750
-- Annual Grid Cost: R27,375
-- Break-even Point: 0.69 years (~8 months)
-
-## Example Scenario - Building Calculator
-Let's consider a scenario:
-- **Building Cost**: $50,000,000
-- **Total Units**: 200
-- **Recovery Period**: 25 years
-
-**Results:**
-- Monthly Rent per Unit: $833
-- Annual Rent per Unit: $10,000
-- Total Monthly Revenue: $166,600
 
 ## Conclusion
 This project provides a unified platform for various cost recovery calculations, helping users make informed financial decisions for solar investments, real estate projects, and more. The modular structure allows for easy expansion with additional calculators as needed.

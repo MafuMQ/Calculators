@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+
+{% block title %}Fleet & Trip Cost Calculator{% endblock %}
+
+{% block extra_head %}
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/calculator.css') }}">
+<style>
+    .fleet-layout {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 30px;
+    }
+    .fleet-inputs {
+        width: 35%;
+        background-color: #f8fafc;
+        padding: 20px;
+        border-radius: 12px;
+        border: 2px solid #e2e8f0;
+    }
+    .fleet-outputs {
+        width: 60%;
+    }
+    .section-title {
+        margin-top: 0;
+        margin-bottom: 15px;
+        font-size: 1.1rem;
+        color: #0f172a;
+        border-bottom: 2px solid #e2e8f0;
+        padding-bottom: 5px;
+    }
+    .fleet-inputs .form-group {
+        margin-bottom: 12px;
+    }
+    .fleet-inputs label {
+        font-size: 0.9rem;
+        margin-bottom: 4px;
+    }
+    .fleet-inputs input {
+        padding: 8px 10px;
+        font-size: 0.95rem;
+    }
+    @media (max-width: 768px) {
+        .fleet-layout {
+            flex-direction: column;
+        }
+        .fleet-inputs, .fleet-outputs {
+            width: 100%;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 1200px;">
+    <header>
+        <h1>Fleet & Trip Cost Calculator</h1>
+        <p class="subtitle">Calculate trip costs based on fuel, driver pay, and vehicle financing.</p>
+    </header>
+    
+    <div class="card fleet-layout">
+        <div class="fleet-inputs">
+            <h3 class="section-title">Trip Variables</h3>
+            <div class="form-group">
+                <label for="distance">Distance (km)</label>
+                <input type="number" id="distance" step="1" value="20" required>
+            </div>
+            <div class="form-group">
+                <label for="duration">Trip Duration (minutes)</label>
+                <input type="number" id="duration" step="1" value="25" required>
+            </div>
+            
+            <h3 class="section-title">Fuel Variables</h3>
+            <div class="form-group">
+                <label for="efficiency">Fuel Efficiency (L/100km)</label>
+                <input type="number" id="efficiency" step="0.1" value="6" required>
+            </div>
+            <div class="form-group">
+                <label for="fuel_price">Fuel Price (ZAR/L)</label>
+                <input type="number" id="fuel_price" step="0.5" value="30" required>
+            </div>
+            
+            <h3 class="section-title">Driver Variables</h3>
+            <div class="form-group">
+                <label for="driver_pay">Driver Pay (ZAR)</label>
+                <input type="number" id="driver_pay" step="1" value="150" required>
+            </div>
+            <div class="form-group">
+                <label for="driver_pay_period">Pay Period</label>
+                <select id="driver_pay_period" style="width: 100%; padding: 8px 10px; border: 2px solid #d1e8ff; border-radius: 10px; font-size: 0.95rem; background: white;">
+                    <option value="per_hour">Per Hour</option>
+                    <option value="per_day">Per Day</option>
+                    <option value="per_month">Per Month</option>
+                </select>
+            </div>
+            
+            <h3 class="section-title">Vehicle Variables</h3>
+            <div class="form-group">
+                <label for="car_payment">Car Payment (ZAR/month)</label>
+                <input type="number" id="car_payment" step="100" value="4000" required>
+            </div>
+            <div class="form-group">
+                <label for="hours_day">Working Hours/Day</label>
+                <input type="number" id="hours_day" step="1" value="5" required>
+            </div>
+            <div class="form-group">
+                <label for="days_week">Working Days/Week</label>
+                <input type="number" id="days_week" step="1" value="5" required>
+            </div>
+        </div>
+        
+        <div class="fleet-outputs">
+            <div id="error-message" class="error"></div>
+            
+            <div id="results" class="results" style="display: block; margin-top: 0;">
+                <h2 id="total-cost-text" style="text-align: center; color: #2c3e50; font-size: 32px; margin-bottom: 20px;">Loading...</h2>
+                
+                <div class="graph-row">
+                    <div class="graph-card" style="width: 100%; border: none; background: transparent; padding: 0; box-shadow: none;">
+                        <div id="graph-pie-container"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/fleet.js') }}"></script>
+{% endblock %}

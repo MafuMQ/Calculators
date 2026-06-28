@@ -26,6 +26,11 @@ def fixed_deposit_calculator():
     """Fixed deposit calculator"""
     return render_template('fixed_deposit_calculator.html')
 
+@app.route('/fleet')
+def fleet_calculator():
+    """Fleet & Trip Cost calculator"""
+    return render_template('fleet_calculator.html')
+
 @app.route('/calculate', methods=['POST'])
 def calculate():
     try:
@@ -145,6 +150,73 @@ def calculate():
             'payback_period': round(payback_period, 2) if payback_period != float('inf') else 'Never',
             'graph_cumulative': graph_cumulative_json,
             'graph_cost': graph_cost_json
+        })
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)})
+
+@app.route('/calculate-fleet', methods=['POST'])
+def calculate_fleet():
+    try:
+        distance = float(request.form['distance'])
+        duration = float(request.form['duration'])
+        efficiency = float(request.form['efficiency'])
+        fuel_price = float(request.form['fuel_price'])
+        driver_pay = float(request.form['driver_pay'])
+        driver_pay_period = request.form['driver_pay_period']
+        car_payment = float(request.form['car_payment'])
+        hours_day = float(request.form['hours_day'])
+        days_week = float(request.form['days_week'])
+
+        # Validations
+        if any(v < 0 for v in [distance, duration, efficiency, fuel_price, driver_pay, car_payment, hours_day, days_week]):
+            raise ValueError("Values cannot be negative.")
+
+        # 1. Fuel Calculation
+        fuel_cost = distance * (efficiency / 100) * fuel_price
+        
+        # Time Constants
+        hours_per_week = hours_day * days_week
+        hours_per_year = hours_per_week * 52
+        hours_per_month = hours_per_year / 12
+
+        # 2. Driver Calculation
+        if driver_pay_period == 'per_hour':
+            driver_hourly = driver_pay
+        elif driver_pay_period == 'per_day':
+            driver_hourly = driver_pay / hours_day if hours_day > 0 else 0
+        else: # per_month
+            driver_hourly = driver_pay / hours_per_month if hours_per_month > 0 else 0
+            
+        driver_cost = (duration / 60) * driver_hourly
+        
+        # 3. Vehicle Calculation
+        # Prevent division by zero
+        car_cost_per_hour = (car_payment / hours_per_month) if hours_per_month > 0 else 0
+        car_cost = (duration / 60) * car_cost_per_hour
+        
+        # Total
+        total_cost = fuel_cost + driver_cost + car_cost
+        
+        # Format the header text
+        total_text = f"Total Trip Cost: R {total_cost:.2f}"
+
+        # Create the Pie Chart using graph_objs
+        fig = go.Figure(data=[go.Pie(
+            labels=['Fuel', 'Driver Pay', 'Vehicle Financing'],
+            values=[fuel_cost, driver_cost, car_cost],
+            hole=0.4,
+            marker_colors=['#e74c3c', '#3498db', '#2ecc71'],
+            textinfo='percent+label',
+            textposition='inside'
+        )])
+        fig.update_layout(title_text='Cost Breakdown', title_x=0.5)
+
+        graph_pie_json = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+
+        return jsonify({
+            'success': True,
+            'total_text': total_text,
+            'graph_pie': graph_pie_json
         })
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)})

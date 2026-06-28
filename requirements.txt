@@ -1,2 +1,5 @@
 Flask
 plotly
+Dash
+numpy
+pandas
