@@ -17,51 +17,109 @@
     <div class="card split-layout">
         <div class="inputs-section fleet-inputs">
             <h3 class="section-title">Trip Variables</h3>
-            <div class="form-group">
-                <label for="distance">Distance (km)</label>
-                <input type="number" id="distance" step="1" value="20" required>
+            <div class="input-group">
+                <label>
+                    <span>Distance (km)</span>
+                    <span class="value-display" id="distanceDisplay">20 km</span>
+                </label>
+                <input type="range" id="distance" min="1" max="1000" step="1" value="20">
+                <div class="range-labels">
+                    <span>1 km</span>
+                    <span>1,000 km</span>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="duration">Trip Duration (minutes)</label>
-                <input type="number" id="duration" step="1" value="25" required>
+            <div class="input-group">
+                <label>
+                    <span>Trip Duration (minutes)</span>
+                    <span class="value-display" id="durationDisplay">25 min</span>
+                </label>
+                <input type="range" id="duration" min="1" max="1440" step="1" value="25">
+                <div class="range-labels">
+                    <span>1 min</span>
+                    <span>1,440 min</span>
+                </div>
             </div>
             
             <h3 class="section-title">Fuel Variables</h3>
-            <div class="form-group">
-                <label for="efficiency">Fuel Efficiency (L/100km)</label>
-                <input type="number" id="efficiency" step="0.1" value="6" required>
+            <div class="input-group">
+                <label>
+                    <span>Fuel Efficiency (L/100km)</span>
+                    <span class="value-display" id="efficiencyDisplay">6.0 L/100km</span>
+                </label>
+                <input type="range" id="efficiency" min="1" max="30" step="0.1" value="6">
+                <div class="range-labels">
+                    <span>1 L/100km</span>
+                    <span>30 L/100km</span>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="fuel_price">Fuel Price (ZAR/L)</label>
-                <input type="number" id="fuel_price" step="0.5" value="30" required>
+            <div class="input-group">
+                <label>
+                    <span>Fuel Price (ZAR/L)</span>
+                    <span class="value-display" id="fuelPriceDisplay">R30.00</span>
+                </label>
+                <input type="range" id="fuel_price" min="10" max="50" step="0.5" value="30">
+                <div class="range-labels">
+                    <span>R10.00</span>
+                    <span>R50.00</span>
+                </div>
             </div>
             
             <h3 class="section-title">Driver Variables</h3>
-            <div class="form-group">
-                <label for="driver_pay">Driver Pay (ZAR)</label>
-                <input type="number" id="driver_pay" step="1" value="150" required>
+            <div class="input-group">
+                <label>
+                    <span>Driver Pay</span>
+                    <span class="value-display" id="driverPayDisplay">R150</span>
+                </label>
+                <input type="range" id="driver_pay" min="10" max="50000" step="10" value="150">
+                <div class="range-labels">
+                    <span>R10</span>
+                    <span>R50,000</span>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="driver_pay_period">Pay Period</label>
-                <select id="driver_pay_period" style="width: 100%; padding: 8px 10px; border: 2px solid #d1e8ff; border-radius: 10px; font-size: 0.95rem; background: white;">
-                    <option value="per_hour">Per Hour</option>
-                    <option value="per_day">Per Day</option>
-                    <option value="per_month">Per Month</option>
-                </select>
+            <div class="input-group">
+                <label>
+                    <span>Pay Period</span>
+                    <select id="driver_pay_period" style="width: 100%; padding: 8px 10px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 0.95rem; background: white;">
+                        <option value="per_hour">Per Hour</option>
+                        <option value="per_day">Per Day</option>
+                        <option value="per_month">Per Month</option>
+                    </select>
+                </label>
             </div>
             
             <h3 class="section-title">Vehicle Variables</h3>
-            <div class="form-group">
-                <label for="car_payment">Car Payment (ZAR/month)</label>
-                <input type="number" id="car_payment" step="100" value="4000" required>
+            <div class="input-group">
+                <label>
+                    <span>Car Payment (ZAR/month)</span>
+                    <span class="value-display" id="carPaymentDisplay">R4,000</span>
+                </label>
+                <input type="range" id="car_payment" min="1000" max="50000" step="100" value="4000">
+                <div class="range-labels">
+                    <span>R1,000</span>
+                    <span>R50,000</span>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="hours_day">Working Hours/Day</label>
-                <input type="number" id="hours_day" step="1" value="5" required>
+            <div class="input-group">
+                <label>
+                    <span>Working Hours/Day</span>
+                    <span class="value-display" id="hoursDayDisplay">5 hours</span>
+                </label>
+                <input type="range" id="hours_day" min="1" max="24" step="1" value="5">
+                <div class="range-labels">
+                    <span>1 hour</span>
+                    <span>24 hours</span>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="days_week">Working Days/Week</label>
-                <input type="number" id="days_week" step="1" value="5" required>
+            <div class="input-group">
+                <label>
+                    <span>Working Days/Week</span>
+                    <span class="value-display" id="daysWeekDisplay">5 days</span>
+                </label>
+                <input type="range" id="days_week" min="1" max="7" step="1" value="5">
+                <div class="range-labels">
+                    <span>1 day</span>
+                    <span>7 days</span>
+                </div>
             </div>
         </div>
         

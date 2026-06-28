@@ -3,22 +3,31 @@
 const costInput = document.getElementById('cost');
 const unitsInput = document.getElementById('units');
 const yearsInput = document.getElementById('years');
+const costPerSqmInput = document.getElementById('costPerSqm');
+const unitSizeInput = document.getElementById('unitSize');
 const currencySelect = document.getElementById('currency');
 
 const costDisplay = document.getElementById('costDisplay');
 const unitsDisplay = document.getElementById('unitsDisplay');
 const yearsDisplay = document.getElementById('yearsDisplay');
+const costPerSqmDisplay = document.getElementById('costPerSqmDisplay');
+const unitSizeDisplay = document.getElementById('unitSizeDisplay');
 const resultDisplay = document.getElementById('result');
 const annualPerUnitDisplay = document.getElementById('annualPerUnit');
 const totalMonthlyDisplay = document.getElementById('totalMonthly');
+const totalBuildingCostCard = document.getElementById('totalBuildingCostCard');
 const minCostLabel = document.getElementById('minCostLabel');
 const maxCostLabel = document.getElementById('maxCostLabel');
+const minCostPerSqmLabel = document.getElementById('minCostPerSqmLabel');
+const maxCostPerSqmLabel = document.getElementById('maxCostPerSqmLabel');
 
 // Store actual values (can exceed slider max)
 let actualValues = {
     cost: null,
     units: null,
-    years: null
+    years: null,
+    costPerSqm: null,
+    unitSize: null
 };
 
 // Return an Intl.NumberFormat for the chosen currency
@@ -38,11 +47,26 @@ function getFormatter(currency) {
     });
 }
 
-function calculate() {
-    // Get values - use actual values if set, otherwise use slider values
-    const cost = actualValues.cost !== null ? actualValues.cost : parseFloat(costInput.value);
-    const units = actualValues.units !== null ? actualValues.units : parseFloat(unitsInput.value);
-    const years = actualValues.years !== null ? actualValues.years : parseFloat(yearsInput.value);
+function calculate(source = null) {
+    let cost = actualValues.cost !== null ? actualValues.cost : parseFloat(costInput.value);
+    let units = actualValues.units !== null ? actualValues.units : parseFloat(unitsInput.value);
+    let years = actualValues.years !== null ? actualValues.years : parseFloat(yearsInput.value);
+    let costPerSqm = actualValues.costPerSqm !== null ? actualValues.costPerSqm : parseFloat(costPerSqmInput.value);
+    let unitSize = actualValues.unitSize !== null ? actualValues.unitSize : parseFloat(unitSizeInput.value);
+
+    // Sync logic between total cost and unit components
+    if (source === 'cost') {
+        if (units > 0 && unitSize > 0) {
+            costPerSqm = cost / (units * unitSize);
+            actualValues.costPerSqm = costPerSqm;
+            costPerSqmInput.value = costPerSqm <= parseFloat(costPerSqmInput.max) ? costPerSqm : costPerSqmInput.max;
+        }
+    } else if (source === 'costPerSqm' || source === 'unitSize' || source === 'units' || source === 'init') {
+        cost = costPerSqm * unitSize * units;
+        actualValues.cost = cost;
+        costInput.value = cost <= parseFloat(costInput.max) ? cost : costInput.max;
+    }
+
     const currency = (currencySelect && currencySelect.value) ? currencySelect.value : 'ZAR';
     const currencyFormat = getFormatter(currency);
 
@@ -50,13 +74,17 @@ function calculate() {
     costDisplay.textContent = currencyFormat.format(cost);
     unitsDisplay.textContent = units.toLocaleString();
     yearsDisplay.textContent = years + (years === 1 ? " Year" : " Years");
+    costPerSqmDisplay.textContent = currencyFormat.format(costPerSqm);
+    unitSizeDisplay.textContent = unitSize.toLocaleString() + " sqm";
 
     // Update min/max range labels to reflect currency
     if (minCostLabel && maxCostLabel) {
-        const min = parseInt(costInput.min, 10);
-        const max = parseInt(costInput.max, 10);
-        minCostLabel.textContent = currencyFormat.format(min);
-        maxCostLabel.textContent = currencyFormat.format(max);
+        minCostLabel.textContent = currencyFormat.format(parseInt(costInput.min, 10));
+        maxCostLabel.textContent = currencyFormat.format(parseInt(costInput.max, 10));
+    }
+    if (minCostPerSqmLabel && maxCostPerSqmLabel) {
+        minCostPerSqmLabel.textContent = currencyFormat.format(parseInt(costPerSqmInput.min, 10));
+        maxCostPerSqmLabel.textContent = currencyFormat.format(parseInt(costPerSqmInput.max, 10));
     }
 
     // Calculate Logic: Cost / (Units * Years * 12)
@@ -76,6 +104,10 @@ function calculate() {
     resultDisplay.textContent = currencyFormat.format(monthlyRent);
     annualPerUnitDisplay.textContent = currencyFormat.format(annualPerUnit);
     totalMonthlyDisplay.textContent = currencyFormat.format(totalMonthly);
+    
+    if (totalBuildingCostCard) {
+        totalBuildingCostCard.textContent = currencyFormat.format(cost);
+    }
 }
 
 // Function to make a display element editable
@@ -84,13 +116,15 @@ function makeEditable(displayElement, rangeInput, parseFunc, valueKey) {
     displayElement.title = 'Click to edit';
     
     displayElement.addEventListener('click', function() {
-        const currentValue = rangeInput.value;
+        // Find current precise value or slider value
+        const currentValue = actualValues[valueKey] !== null ? actualValues[valueKey] : rangeInput.value;
         const originalText = displayElement.textContent;
         
         // Create input element
         const input = document.createElement('input');
         input.type = 'text';
-        input.value = currentValue;
+        // Format it nicely for editing or just raw number
+        input.value = Math.round(currentValue);
         input.style.width = '100%';
         input.style.padding = '4px';
         input.style.fontSize = 'inherit';
@@ -122,7 +156,7 @@ function makeEditable(displayElement, rangeInput, parseFunc, valueKey) {
                     rangeInput.value = newValue;
                 }
                 
-                calculate();
+                calculate(valueKey);
             } else {
                 // Invalid input, revert
                 displayElement.textContent = originalText;
@@ -152,37 +186,22 @@ function makeEditable(displayElement, rangeInput, parseFunc, valueKey) {
 }
 
 // Make value displays editable
-makeEditable(costDisplay, costInput, (val) => {
-    // Remove currency symbols, spaces, and commas
-    return parseFloat(val.replace(/[^0-9.-]/g, ''));
-}, 'cost');
-
-makeEditable(unitsDisplay, unitsInput, (val) => {
-    // Remove commas and parse as integer
-    return parseInt(val.replace(/[^0-9]/g, ''), 10);
-}, 'units');
-
-makeEditable(yearsDisplay, yearsInput, (val) => {
-    // Extract number from "X Years" or just "X"
-    return parseInt(val.replace(/[^0-9]/g, ''), 10);
-}, 'years');
+makeEditable(costDisplay, costInput, (val) => parseFloat(val.replace(/[^0-9.-]/g, '')), 'cost');
+makeEditable(unitsDisplay, unitsInput, (val) => parseInt(val.replace(/[^0-9]/g, ''), 10), 'units');
+makeEditable(yearsDisplay, yearsInput, (val) => parseInt(val.replace(/[^0-9]/g, ''), 10), 'years');
+makeEditable(costPerSqmDisplay, costPerSqmInput, (val) => parseFloat(val.replace(/[^0-9.-]/g, '')), 'costPerSqm');
+makeEditable(unitSizeDisplay, unitSizeInput, (val) => parseInt(val.replace(/[^0-9]/g, ''), 10), 'unitSize');
 
 // Add Event Listeners - clear actual value when slider is moved
-costInput.addEventListener('input', () => {
-    actualValues.cost = null;
-    calculate();
-});
-unitsInput.addEventListener('input', () => {
-    actualValues.units = null;
-    calculate();
-});
-yearsInput.addEventListener('input', () => {
-    actualValues.years = null;
-    calculate();
-});
+costInput.addEventListener('input', () => { actualValues.cost = null; calculate('cost'); });
+unitsInput.addEventListener('input', () => { actualValues.units = null; calculate('units'); });
+yearsInput.addEventListener('input', () => { actualValues.years = null; calculate('years'); });
+costPerSqmInput.addEventListener('input', () => { actualValues.costPerSqm = null; calculate('costPerSqm'); });
+unitSizeInput.addEventListener('input', () => { actualValues.unitSize = null; calculate('unitSize'); });
+
 if (currencySelect) {
-    currencySelect.addEventListener('change', calculate);
+    currencySelect.addEventListener('change', () => calculate('currency'));
 }
 
 // Initial Run
-calculate();
+calculate('init');

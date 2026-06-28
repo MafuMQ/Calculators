@@ -8,14 +8,14 @@
 {% endblock %}
 
 {% block content %}
-<div class="calculator-container">
-    <div class="calculator" style="max-width: 1000px;">
-        <header>
-            <h2>Building Cost Recovery</h2>
-            <p class="description" style="margin-bottom: 0;">Calculate the monthly rent per unit needed to recover construction costs</p>
-        </header>
+<div class="container" style="max-width: 1000px; padding: 40px 20px;">
+    <header>
+        <h1>Building Cost Recovery</h1>
+        <p class="subtitle">Calculate the monthly rent per unit needed to recover construction costs</p>
+    </header>
 
-        <div class="split-layout">
+    <div class="calculator" style="max-width: 100%;">
+        <div class="split-layout" style="margin-top: 0;">
             <div class="inputs-section">
                 <div class="input-group">
             <label>
@@ -31,18 +31,6 @@
 
         <div class="input-group">
             <label>
-                <span>Building Cost</span>
-                <span class="value-display" id="costDisplay">$65,000,000</span>
-            </label>
-            <input type="range" id="cost" min="0" max="200000000" step="100000" value="65000000">
-            <div class="range-labels">
-                <span id="minCostLabel">R1M</span>
-                <span id="maxCostLabel">R200M</span>
-            </div>
-        </div>
-
-        <div class="input-group">
-            <label>
                 <span>Total Units</span>
                 <span class="value-display" id="unitsDisplay">235</span>
             </label>
@@ -50,6 +38,42 @@
             <div class="range-labels">
                 <span>1</span>
                 <span>1,000</span>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label>
+                <span>Unit Size (sqm)</span>
+                <span class="value-display" id="unitSizeDisplay">100 sqm</span>
+            </label>
+            <input type="range" id="unitSize" min="20" max="1000" step="10" value="100">
+            <div class="range-labels">
+                <span>20 sqm</span>
+                <span>1,000 sqm</span>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label>
+                <span>Cost per SQM</span>
+                <span class="value-display" id="costPerSqmDisplay">R15,000</span>
+            </label>
+            <input type="range" id="costPerSqm" min="1000" max="50000" step="500" value="15000">
+            <div class="range-labels">
+                <span id="minCostPerSqmLabel">R1K</span>
+                <span id="maxCostPerSqmLabel">R50K</span>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label>
+                <span>Total Building Cost</span>
+                <span class="value-display" id="costDisplay">$65,000,000</span>
+            </label>
+            <input type="range" id="cost" min="0" max="200000000" step="100000" value="65000000">
+            <div class="range-labels">
+                <span id="minCostLabel">R1M</span>
+                <span id="maxCostLabel">R200M</span>
             </div>
         </div>
 
@@ -84,6 +108,10 @@
                 <div class="info-item">
                     <div class="info-label">Total Monthly</div>
                     <div class="info-value" id="totalMonthly">R270,680</div>
+                </div>
+                <div class="info-item" style="grid-column: 1 / -1; margin-top: 10px;">
+                    <div class="info-label">Total Building Cost</div>
+                    <div class="info-value" id="totalBuildingCostCard" style="font-size: 1.5rem; color: #2563eb;">R0</div>
                 </div>
             </div>
         </div>
